@@ -12,20 +12,16 @@ searchInput.addEventListener('input', (e) => {
         github.getUser(userText)
             .then(data => {
                 if(data.profile.message === 'Not Found') {
-                    // show alert
                     ui.showError('User Not Found');
-                    
                 } else {
-                    // show profile
                     ui.showProfile(data.profile); 
-                    
                 }
                 return data;
             })
             .then(data => github.getRepos(data.repos))
             .then(repos => console.log(repos))
-            .catch(err => console.log(err));
-        
+            .catch(err => console.log(err))
+            
     } else {
         // clear profile
         ui.clearProfile();

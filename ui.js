@@ -48,7 +48,7 @@ class UI {
         let liLocation = this.createEl('li', ['list-group-item'], `Location: ${profile.location}`);
         let liCreatedAt = this.createEl('li', ['list-group-item'], `Member Since: ${profile.created_at}`);
         
-        let h3Repos = this.createEl('h3', ['page-heading', 'mb-3'], 'Latest Repos');
+        let h3Repos = this.createEl('h3', ['page-heading', 'mb-3', 'text-center'], 'Latest Repos');
         let divRepos = document.createElement('div');
             divRepos.id = 'repos';
 
@@ -72,7 +72,15 @@ class UI {
 
         this.clearProfile();
         this.profile.appendChild(divError);
+        
+        // add a set timeout to remove alert after 3 seconds
+        // if (document.querySelector('.alert-danger')) {
+        //     setTimeout(() => {
+        //         this.clearProfile(); 
+        //         }, 3000);
+        //     } 
     }
+
 
     showRepos(repos) {
         
