@@ -19,11 +19,15 @@ searchInput.addEventListener('input', (e) => {
                 return data;
             })
             .then(data => github.getRepos(data.repos))
-            .then(repos => console.log(repos))
+            .then((repos) => {
+                for (repo of repos) {
+                    
+                }
+            })
             .catch(err => console.log(err))
             
     } else {
-        // clear profile
+        // clear profile when input is empty
         ui.clearProfile();
     }
 });

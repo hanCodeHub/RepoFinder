@@ -74,13 +74,19 @@ class UI {
         this.profile.appendChild(divError);
         
         // add a set timeout to remove alert after 3 seconds
-        // if (document.querySelector('.alert-danger')) {
-        //     setTimeout(() => {
-        //         this.clearProfile(); 
-        //         }, 3000);
-        //     } 
+        setTimeout(() => {
+            this.clearError(); 
+            }, 3000);
+        
     }
 
+    clearError() {
+        let errorMsg = document.querySelector('.alert-danger');
+
+        if (errorMsg) {
+            errorMsg.remove();
+        }
+    }
 
     showRepos(repos) {
         
