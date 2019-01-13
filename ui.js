@@ -2,6 +2,7 @@ class UI {
     constructor() {
         // set the UI insertion point as the constructor property
         this.profile = document.getElementById('profile')
+        this.repos = document.getElementById('repos')
     }
 
     createEl(element, classNames, text) {
@@ -22,6 +23,9 @@ class UI {
 
     clearProfile() {
         this.profile.innerHTML = '';
+    }
+    clearRepos() {
+        this.repos.innerHTML = '';
     }
 
     showProfile(profile) {
@@ -48,19 +52,15 @@ class UI {
         let liLocation = this.createEl('li', ['list-group-item'], `Location: ${profile.location}`);
         let liCreatedAt = this.createEl('li', ['list-group-item'], `Member Since: ${profile.created_at}`);
         
-        let h3Repos = this.createEl('h3', ['page-heading', 'mb-3', 'text-center'], 'Latest Repos');
-        let divRepos = document.createElement('div');
-            divRepos.id = 'repos';
 
         let infoList = this.appendEl(ulInfo, [liCompany, liBlog, liLocation, liCreatedAt]);
         let column3 = this.appendEl(divCol3, [img, profileLink]);
         let column9 = this.appendEl(divCol9, [spanRepos, spanGists, spanFllwers, spanFllwing, infoList]);
         let rowMain = this.appendEl(divRow, [column3, column9]);
         divCard.appendChild(rowMain);
-
-        let finalFrag = this.appendEl(fragment, [divCard, h3Repos, divRepos]);
         
         this.clearProfile();
+        let finalFrag = this.appendEl(fragment, [divCard]);
         this.profile.appendChild(finalFrag);
     }
 
@@ -89,6 +89,13 @@ class UI {
     }
 
     showRepos(repos) {
-        
+        let fragment = document.createDocumentFragment();
+
+        let h3RepoTitle = this.createEl('h3', ['page-heading', 'mb-3', 'text-center'], 'Latest Repos');
+
+        this.clearRepos();
+        let finalFrag = this.appendEl(fragment, [h3RepoTitle]);
+        this.repos.appendChild(finalFrag);
+       
     }
 }

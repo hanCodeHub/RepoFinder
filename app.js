@@ -20,9 +20,8 @@ searchInput.addEventListener('input', (e) => {
             })
             .then(data => github.getRepos(data.repos))
             .then((repos) => {
-                for (repo of repos) {
-                    
-                }
+                console.log(repos);
+                ui.showRepos(repos);
             })
             .catch(err => console.log(err))
             
