@@ -7,19 +7,24 @@ class GitHub {
     }
 
     async getUser(user) {
-        const profileResponse = await fetch(`https://api.github.com/users/${user}?client_id=${this.client_id}&client_secret=${this.client_secret}`);
-        
-        const profileData = await profileResponse.json();
-        const reposData = profileData.repos_url;
+     
+        const profileResponse = await fetch(`https://api.github.com/users/${user}?client_id=${this.client_id}&client_secret=${this.client_secret}`)
 
-        return {
-            profile: profileData,
-            repos: reposData
-        }
+        if (profileResponse.status === 200) {
+            const profileData = await profileResponse.json();
+            const reposData = profileData.repos_url;
+            return {
+                profile: profileData,
+                repos: reposData
+            }
+        } else {
+            throw new Error('User does not exist.')
+            }   
     }
 
     async getRepos(url) {
         const repoResponse = await fetch(`${url}?per_page=${this.repos_count}&sort=${this.repos_sort}&client_id=${this.client_id}&client_secret=${this.client_secret}`);
+        
         const repoData = await repoResponse.json();
         return repoData;
     }

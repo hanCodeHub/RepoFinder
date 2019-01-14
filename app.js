@@ -21,11 +21,17 @@ searchInput.addEventListener('input', (e) => {
             })
             // fetches github repos data from the profile object
             .then(data => github.getRepos(data.repos))
-            .then((repos) => {
-                console.log(repos);
-                ui.showRepos(repos);
+            .then(repos => {
+                if (repos.length === 0) {
+                    ui.showNoRepos();
+                } else {
+                    ui.showRepos(repos);
+                }
             })
-            .catch(err => console.log(err))
+            .catch(err => {
+                console.log(err);
+                ui.showError('User Not Found');
+            })
             
     } else {
         // clear profile when input is empty

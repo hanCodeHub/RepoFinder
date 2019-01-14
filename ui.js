@@ -85,6 +85,7 @@ class UI {
     }
 
     showRepos(repos) {
+        console.log(repos);
         let fragRepo = document.createDocumentFragment();
         const h3RepoTitle = this.createEl('h3', ['page-heading', 'mb-3', 'mt-5','text-center'], 'Latest Repos');
         fragRepo.appendChild(h3RepoTitle);
@@ -104,5 +105,12 @@ class UI {
         this.clearRepos();
 
         this.repos.appendChild(fragRepo);
+    }
+
+    showNoRepos() {
+        const h3RepoTitle = this.createEl('h3', ['page-heading', 'mb-3', 'mt-5','text-center'], 'No Repos Found')
+        
+        this.clearRepos();
+        this.repos.appendChild(h3RepoTitle);
     }
 }
