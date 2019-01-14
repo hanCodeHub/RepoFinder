@@ -9,6 +9,7 @@ searchInput.addEventListener('input', (e) => {
     const userText = e.target.value;
     
     if (userText !== '') {
+        // fetches github profile data
         github.getUser(userText)
             .then(data => {
                 if(data.profile.message === 'Not Found') {
@@ -18,6 +19,7 @@ searchInput.addEventListener('input', (e) => {
                 }
                 return data;
             })
+            // fetches github repos data from the profile object
             .then(data => github.getRepos(data.repos))
             .then((repos) => {
                 console.log(repos);
@@ -28,5 +30,6 @@ searchInput.addEventListener('input', (e) => {
     } else {
         // clear profile when input is empty
         ui.clearProfile();
+        ui.clearRepos();
     }
 });

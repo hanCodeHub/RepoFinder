@@ -71,13 +71,9 @@ class UI {
         divError.appendChild(h5Error);
 
         this.clearProfile();
+        this.clearRepos();
         this.profile.appendChild(divError);
-        
-        // add a set timeout to remove alert after 3 seconds
-        setTimeout(() => {
-            this.clearError(); 
-            }, 3000);
-        
+    
     }
 
     clearError() {
@@ -89,13 +85,24 @@ class UI {
     }
 
     showRepos(repos) {
-        let fragment = document.createDocumentFragment();
+        let fragRepo = document.createDocumentFragment();
+        const h3RepoTitle = this.createEl('h3', ['page-heading', 'mb-3', 'mt-5','text-center'], 'Latest Repos');
+        fragRepo.appendChild(h3RepoTitle);
 
-        let h3RepoTitle = this.createEl('h3', ['page-heading', 'mb-3', 'text-center'], 'Latest Repos');
+        repos.forEach(repo => {
+            let ulRepo = this.createEl('ul', ['list-group', 'mb-3']);
+            let liName = this.createEl('h5', ['bg-dark', 'text-light', 'list-group-item', 'text-monospace', 'font-weight-bold'], `${repo.name}`);
+            let liDescrip = this.createEl('p', ['list-group-item', 'lead'], `${repo.description}`);
+            let liURL = this.createEl('a', ['list-group-item', 'font-italic', 'text-info'], `${repo.html_url}`);
+                liURL.setAttribute('href', `${repo.html_url}`);
+                liURL.setAttribute('target', `blank`);       
 
+            let repoRow = this.appendEl(ulRepo, [liName, liDescrip, liURL]);
+            fragRepo.appendChild(repoRow);
+        });
+        
         this.clearRepos();
-        let finalFrag = this.appendEl(fragment, [h3RepoTitle]);
-        this.repos.appendChild(finalFrag);
-       
+
+        this.repos.appendChild(fragRepo);
     }
 }
